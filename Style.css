@@ -1,0 +1,761 @@
+/* ============================================================
+   BARK BATTLE — style.css
+   Responsive for mobile, tablet, and desktop
+   ============================================================ */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --cream: #FDF6ED;
+  --orange: #F97316;
+  --orange-light: #FED7AA;
+  --orange-dark: #C2410C;
+  --brown: #92400E;
+  --brown-dark: #451A03;
+  --gold: #F59E0B;
+  --green: #22C55E;
+  --red: #EF4444;
+  --gray: #D1D5DB;
+  --text: #1C0A00;
+  --card-bg: #FFFBF5;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Border radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 50px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 16px rgba(249, 115, 22, 0.12);
+  --shadow-btn: 0 6px 20px rgba(249, 115, 22, 0.4);
+}
+
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  min-height: 100dvh; /* dynamic viewport for mobile browsers */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== SCREENS ===== */
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ============================================================
+   SELECT SCREEN
+   ============================================================ */
+#select-screen {
+  padding: 24px 16px 48px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* --- Title --- */
+.title-area {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.game-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.9rem, 8vw, 3.4rem);
+  color: var(--orange);
+  text-shadow: 3px 3px 0 var(--orange-dark), 0 0 30px rgba(249, 115, 22, 0.25);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  line-height: 1.1;
+}
+
+.game-subtitle {
+  color: #888;
+  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* --- Section Labels --- */
+.section-label {
+  font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.section-label .badge {
+  background: var(--orange-light);
+  color: var(--orange-dark);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: clamp(0.68rem, 1.8vw, 0.78rem);
+  white-space: nowrap;
+}
+
+.section-divider {
+  height: 1px;
+  background: #EEE;
+  margin: 18px 0 14px;
+}
+
+/* --- Dog Cards Grid --- */
+.dogs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.dog-card {
+  background: var(--card-bg);
+  border: 2.5px solid #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 12px 6px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.dog-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.2);
+}
+
+.dog-card:active {
+  transform: scale(0.97);
+}
+
+.dog-card.selected {
+  border-color: var(--orange);
+  background: #FFF7ED;
+  box-shadow: 0 0 0 3px var(--orange-light), 0 6px 20px rgba(249, 115, 22, 0.22);
+}
+
+.dog-avatar {
+  width: clamp(46px, 10vw, 58px);
+  height: clamp(46px, 10vw, 58px);
+  border-radius: 50%;
+  background: #F3E8D8;
+  border: 2.5px solid #E5D5C5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(22px, 5vw, 28px);
+  margin: 0 auto 7px;
+  transition: border-color 0.2s;
+}
+
+.dog-card.selected .dog-avatar {
+  border-color: var(--orange);
+}
+
+.dog-name {
+  font-weight: 800;
+  font-size: clamp(0.68rem, 2vw, 0.82rem);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.dog-tagline {
+  font-size: clamp(0.6rem, 1.6vw, 0.7rem);
+  color: #999;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.dog-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-size: clamp(0.58rem, 1.5vw, 0.66rem);
+  font-weight: 700;
+  flex-wrap: wrap;
+}
+
+.stat-speed { color: var(--gold); }
+.stat-power { color: var(--orange); }
+.stat-hp    { color: var(--red); }
+
+/* --- Difficulty Grid --- */
+.difficulty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.diff-card {
+  background: var(--card-bg);
+  border: 2.5px solid #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 14px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.diff-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+.diff-card:active {
+  transform: scale(0.97);
+}
+
+.diff-card.selected {
+  border-color: var(--orange);
+  background: #FFF7ED;
+  box-shadow: 0 0 0 3px var(--orange-light);
+}
+
+.diff-icon {
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  margin-bottom: 4px;
+}
+
+.diff-name {
+  font-weight: 800;
+  font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+}
+
+.diff-desc {
+  font-size: clamp(0.62rem, 1.7vw, 0.7rem);
+  color: #999;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* --- Fight Button --- */
+.fight-btn {
+  display: block;
+  width: 100%;
+  padding: clamp(13px, 3.5vw, 17px) 16px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.05rem, 4vw, 1.35rem);
+  letter-spacing: 1px;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-transform: uppercase;
+  touch-action: manipulation;
+}
+
+.fight-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.5);
+}
+
+.fight-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ============================================================
+   BATTLE SCREEN
+   ============================================================ */
+#battle-screen {
+  padding: 16px 16px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+/* --- Battle Header --- */
+.battle-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.vs-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.3rem, 5.5vw, 2.3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  line-height: 1.1;
+}
+
+.vs-title .vs {
+  color: var(--orange);
+  font-size: 1.1em;
+  text-shadow: 2px 2px 0 var(--orange-dark);
+}
+
+.diff-badge {
+  display: inline-block;
+  background: var(--orange-light);
+  color: var(--orange-dark);
+  border-radius: 20px;
+  padding: 3px 14px;
+  font-size: clamp(0.7rem, 2vw, 0.82rem);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* --- Fighter Row --- */
+.fighters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 0 6px;
+}
+
+.fighter-block {
+  text-align: center;
+  flex: 1;
+}
+
+.fighter-label {
+  font-size: clamp(0.62rem, 1.8vw, 0.74rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #AAA;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.fighter-circle {
+  width: clamp(80px, 22vw, 115px);
+  height: clamp(80px, 22vw, 115px);
+  border-radius: 50%;
+  background: #F3E8D8;
+  border: 4px solid #E5D5C5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(36px, 10vw, 56px);
+  margin: 0 auto 7px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+
+.fighter-circle.player-circle { border-color: var(--brown); }
+.fighter-circle.cpu-circle    { border-color: var(--gold); }
+
+.fighter-circle.attack-flash {
+  animation: attackFlash 0.4s ease;
+}
+
+@keyframes attackFlash {
+  0%   { transform: scale(1);    box-shadow: none; }
+  30%  { transform: scale(1.18); box-shadow: 0 0 0 8px rgba(249, 115, 22, 0.4); }
+  70%  { transform: scale(1.05); }
+  100% { transform: scale(1);    box-shadow: none; }
+}
+
+.fighter-name-label {
+  font-weight: 800;
+  font-size: clamp(0.72rem, 2.2vw, 0.92rem);
+}
+
+.vs-bolt {
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  color: var(--orange);
+  flex: 0 0 auto;
+  padding: 0 4px;
+  text-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+}
+
+/* --- Mic Area --- */
+.mic-area {
+  background: var(--card-bg);
+  border: 2px solid #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.mic-dot-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.mic-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gray);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.mic-dot.listening { background: var(--green); animation: pulseDot 1s infinite; }
+.mic-dot.active    { background: var(--orange); animation: pulseDot 0.3s infinite; }
+.mic-dot.error     { background: var(--red); }
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.75; }
+}
+
+.mic-status {
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  font-weight: 700;
+  color: #777;
+}
+
+/* --- Volume Meter --- */
+.vol-meter-wrap {
+  height: 8px;
+  background: #EEE;
+  border-radius: 10px;
+  margin: 8px 0 4px;
+  overflow: hidden;
+}
+
+.vol-meter-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green), var(--orange), var(--red));
+  border-radius: 10px;
+  transition: width 0.06s linear;
+}
+
+.hold-tip {
+  font-size: clamp(0.68rem, 2vw, 0.78rem);
+  color: var(--orange);
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.cpu-thinking {
+  font-size: clamp(0.62rem, 1.8vw, 0.74rem);
+  font-weight: 700;
+  color: var(--gold);
+  min-height: 16px;
+  margin-top: 3px;
+}
+
+.cpu-thinking.active {
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+/* --- Mobile Tap Bark Button (fallback) --- */
+.tap-bark-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--brown), var(--brown-dark));
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  letter-spacing: 1px;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(146, 64, 14, 0.35);
+  transition: transform 0.12s, box-shadow 0.12s;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.tap-bark-btn:active,
+.tap-bark-btn.holding {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(146, 64, 14, 0.5);
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+}
+
+/* --- Tug of War --- */
+.tug-section {
+  margin-bottom: 12px;
+}
+
+.tug-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(0.68rem, 2vw, 0.8rem);
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.lbl-player { color: var(--brown); }
+.lbl-center {
+  color: #AAA;
+  font-size: clamp(0.6rem, 1.7vw, 0.72rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.lbl-cpu { color: var(--gold); }
+
+.tug-track {
+  height: clamp(20px, 5vw, 26px);
+  background: #EEE;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #DDD;
+}
+
+.tug-player-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brown-dark), var(--brown));
+  border-radius: 20px;
+  transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.tug-flag {
+  position: absolute;
+  right: -10px;
+  top: -5px;
+  font-size: clamp(16px, 4.5vw, 22px);
+  transition: right 0.3s;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  pointer-events: none;
+}
+
+.tug-status {
+  text-align: center;
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  font-weight: 800;
+  margin-top: 5px;
+  min-height: 18px;
+  color: var(--text);
+}
+
+/* --- Bark Counter --- */
+.bark-counter {
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: var(--orange);
+  margin-top: 8px;
+}
+
+.bark-label {
+  font-size: 0.75rem;
+  color: #AAA;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+}
+
+/* --- Attack Log --- */
+.attack-log {
+  background: var(--card-bg);
+  border: 2px solid #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  min-height: 44px;
+  max-height: clamp(60px, 15vw, 88px);
+  overflow-y: auto;
+  margin-top: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.log-entry {
+  font-size: clamp(0.62rem, 1.8vw, 0.76rem);
+  font-weight: 700;
+  padding: 2px 0;
+  animation: fadeInLog 0.3s ease;
+  border-bottom: 1px dashed #F0E8D8;
+}
+
+.log-entry:last-child { border-bottom: none; }
+.log-entry.player-log { color: var(--brown); }
+.log-entry.cpu-log    { color: var(--orange-dark); }
+
+@keyframes fadeInLog {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   WIN SCREEN
+   ============================================================ */
+#win-screen {
+  text-align: center;
+  padding: clamp(32px, 8vw, 60px) 20px 48px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.win-emoji {
+  font-size: clamp(3rem, 12vw, 5rem);
+  margin-bottom: 12px;
+  animation: winBounce 0.6s ease infinite alternate;
+  display: block;
+}
+
+@keyframes winBounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-14px); }
+}
+
+.win-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.8rem, 8vw, 2.8rem);
+  margin-bottom: 8px;
+}
+
+.win-title.win  { color: var(--green); text-shadow: 2px 2px 0 #15803D; }
+.win-title.lose { color: var(--red);   text-shadow: 2px 2px 0 #991B1B; }
+
+.win-sub {
+  color: #888;
+  font-size: clamp(0.82rem, 2.5vw, 1rem);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.win-stats {
+  background: var(--card-bg);
+  border: 2px solid #E5D5C5;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: clamp(0.75rem, 2.2vw, 0.88rem);
+  font-weight: 700;
+  color: #666;
+  line-height: 1.8;
+}
+
+.play-again-btn {
+  display: inline-block;
+  padding: clamp(12px, 3.5vw, 16px) clamp(28px, 8vw, 44px);
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  letter-spacing: 1px;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: transform 0.2s, box-shadow 0.2s;
+  touch-action: manipulation;
+}
+
+.play-again-btn:hover  { transform: translateY(-2px); }
+.play-again-btn:active { transform: scale(0.97); }
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+.particle-burst {
+  position: fixed;
+  pointer-events: none;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.particle {
+  position: absolute;
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  animation: particleFall 1.6s ease-out forwards;
+}
+
+@keyframes particleFall {
+  0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* Small phones (320–374px) */
+@media (max-width: 374px) {
+  .dogs-grid        { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .difficulty-grid  { gap: 7px; }
+  .dog-card         { padding: 10px 4px 8px; }
+  .section-label    { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+
+/* Standard phones (375–599px) */
+@media (max-width: 599px) {
+  .dogs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tablets portrait (600–899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .dogs-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Landscape phones — tighten vertical spacing */
+@media (max-height: 500px) and (orientation: landscape) {
+  .title-area         { margin-bottom: 12px; }
+  .fighters-row       { margin-bottom: 10px; }
+  .mic-area           { padding: 10px; margin-bottom: 10px; }
+  .tug-section        { margin-bottom: 6px; }
+  .section-divider    { margin: 10px 0 8px; }
+  .game-title         { font-size: 1.6rem; }
+  .fighter-circle     { width: 64px; height: 64px; font-size: 28px; }
+  #battle-screen      { padding-top: 10px; padding-bottom: 20px; }
+  .attack-log         { max-height: 44px; }
+}
+
+/* Desktop (900px+) */
+@media (min-width: 900px) {
+  #select-screen,
+  #battle-screen,
+  #win-screen {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .dog-card:hover { cursor: pointer; }
+}
